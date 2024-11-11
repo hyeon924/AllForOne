@@ -1,0 +1,209 @@
+.SD-contentArea {
+  width: 100%;
+  height: auto;
+  background-image: url(../../img/png/bg-item01.png);
+  padding: 120px 0px;
+}
+
+.SD-contentBox {
+  width: 1110px;
+  height: auto;
+  border: 1px solid #000;
+  border-radius: 10px;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  background-color: #fff;
+  padding: 24px;
+}
+
+.SD-contentBox > div {
+  margin-bottom: 24px;
+}
+.SD-contentBox > div:last-child {
+  margin-bottom: 0;
+}
+
+.SD-titleBox {
+  width: 100%;
+  height: 450px;
+  display: flex;
+}
+
+.SD-imgBox {
+  width: 360px;
+  height: 100%;
+  border-radius: 16px;
+  background-image: url(../../img/png/ex-img.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.SD-title_textBox {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  padding-left: 12px;
+}
+.SD-title_textBox > img {
+  flex: 0 0 54px;
+}
+.SD-titleText {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 12px;
+}
+
+.SD-titleText > p,
+.SD-titleText > div {
+  width: 100%;
+  margin: 0 !important;
+}
+
+.SD-nickname {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.SD-nickname > span {
+  font-size: 16px;
+}
+
+.SD-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.SD-story {
+  font-size: 18px;
+}
+
+.SD-hashtagBox {
+  display: flex;
+  flex-wrap: wrap; /* 아이템이 너비를 벗어나면 줄바꿈 */
+  gap: 10px;
+}
+.SD-viewBox {
+  line-height: 32px;
+}
+.SD-viewBox > span > img,
+.SD-viewBox > a > img {
+  width: 32px;
+  margin-right: 8px;
+}
+.SD-viewBox > span,
+ .SD-viewBox > a > span{
+  font-size: 18px;
+  margin-right: 24px;
+  font-weight: bold;
+  color : #000;
+}
+
+.SD-textBoxButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.SD-textBoxButton>a {
+  width: 120px;
+  color: #fff;
+}
+.SD-textBoxButton>a:last-child {
+  margin-left: 12px;
+}
+.btn-modify {
+    background-color: blue;
+}
+
+.btn-delete {
+    background-color: red;
+}
+
+.SD-bodyTextBox {
+  width: 100%;
+  height: auto;
+  border: 1px solid #f3f3f3;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.SD-commentTextBox {
+  width: 100%;
+}
+.SD-commentTextBox > p {
+  margin: 0 !important;
+}
+
+.SD-commentButtonBox {
+  display: flex;
+}
+.SD-commentButtonBox > a,
+.SD-commentButtonBox > button {
+  width: 24px;
+  height: 24px;
+  background-color: #e6e6e6;
+  border: none;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 8px;
+}
+.SD-commentButtonBox > a:hover,
+.SD-commentButtonBox > button:hover {
+  transition: 0.3s;
+  background-color: #d4d4d4;
+}
+
+.SD-subCommentBox {
+  border-top: 1px solid #ddd;
+  padding: 8px 12px;
+}
+
+.SD-listButtonBox {
+  width: 100%;
+  height: 85px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.SD-listButtonBox > .SD-listPageBTN {
+  background: none;
+  border: none;
+}
+.SD-listButtonBox > .SD-previousBTN,
+.SD-listButtonBox > .SD-nextBTN {
+  width: 400px;
+  background-color: #BED8EE;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
+.SD-listButtonBox > .SD-previousBTN > p,
+.SD-listButtonBox > .SD-nextBTN > p {
+  flex: 1;
+  height: 100%;
+  margin: 0 !important;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+
+.SD-listButtonBox > .SD-previousBTN > p {
+  text-align: left;
+}
+.SD-listButtonBox > .SD-nextBTN > p {
+  text-align: right;
+}
+
+.SD-form textarea {
+    height: 120px;
+}

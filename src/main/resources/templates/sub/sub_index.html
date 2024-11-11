@@ -1,0 +1,19 @@
+<html layout:decorate="~{layout/layout}">
+<head>
+  <link rel="stylesheet" th:href="@{/css/pages/sub.css}">
+</head>
+<div layout:fragment="content">
+
+  <!-- 경로 -->
+  <div class="navArea">
+    <a th:href="@{/}">Home</a>
+    <span>|</span>
+    <a th:href="@{/review/index}">Preparing</a>
+  </div>
+
+  <div class="imgBoxx" style="width: 100%; display: flex; justify-content: center; align-items: center; padding: 24px;">
+    <img th:src="@{/img/png/000.jpg}" alt="img" >
+  </div>
+
+</div>
+</html>

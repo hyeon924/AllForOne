@@ -1,0 +1,164 @@
+<html layout:decorate="~{layout/layout}">
+<head>
+  <link rel="stylesheet" th:href="@{/css/pages/sub_detail.css}">
+</head>
+<div layout:fragment="content">
+
+  <!-- 경로 -->
+  <div class="navArea">
+    <a th:href="@{/}">Home</a>
+    <span>|</span>
+    <a th:href="@{/review/sub}">Content</a>
+    <span>|</span>
+    <span>DRAMA</span>
+  </div>
+
+  <!-- 주요 내용 -->
+  <div class="SD-contentArea">
+    <div class="SD-contentBox">
+      <div class="SD-titleBox">
+        <div class="SD-imgBox"></div>
+        <div class="SD-title_textBox">
+          <img alt="svg" th:src="@{/img/svg/token-branded_lovely.svg}">
+          <div class="SD-titleText">
+            <p class="SD-nickname" th:if="${review.author != null}" th:text="${review.author.nickname}"><span
+                    th:text="${#temporals.format(review.createDate, 'yyyy.MM.dd')}"></span></p>
+            <p class="SD-title" th:text="${review.title}"></p>
+            <p class="SD-story" th:text="${review.contentStory}"></p>
+            <div class="SD-hashtagBox">
+              <div class="hashtagItem"><span>#hashtag</span></div>
+              <div class="hashtagItem"><span>#hashtag</span></div>
+              <div class="hashtagItem"><span>#hashtag</span></div>
+              <div class="hashtagItem"><span>#hashtag</span></div>
+              <div class="hashtagItem"><span>#hashtag</span></div>
+              <div class="hashtagItem"><span>#hashtag</span></div>
+              <div class="hashtagItem"><span>#hashtag</span></div>
+              <div class="hashtagItem"><span>#hashtag</span></div>
+            </div>
+
+            <div class="container mt-5">
+              <!-- <h3>별점과 숫자</h3> -->
+
+              <div class="d-flex align-items-center SD-starBox">
+                <!-- 별점 영역 -->
+                <div class="star-rating me-3">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                </div>
+                <!-- 숫자 표시 -->
+                <span><strong>3</strong> / 5</span>
+              </div>
+            </div>
+
+            <div class="SD-viewBox">
+              <span>
+                <img alt="svg" th:src="@{/img/svg/weui_eyes-on-filled.svg}">
+                20
+              </span>
+              <a href="javascript:void(0);" class="recommend"
+                               th:data-uri="@{|/review/vote/${review.id}|}">
+                <img alt="svg" th:src="@{/img/svg/icon-park-outline_good-two.svg}">
+                <span th:text="${#lists.size(review.voter)}"></span>
+            </a>
+            </div>
+
+            <div class="SD-textBoxButton">
+              <a th:href="@{|/review/modify/${review.id}|}" class="btn-modify btn btn-sm btn-outline-secondary"
+                 sec:authorize="isAuthenticated()"
+                 th:if="${review.author != null and #authentication.getPrincipal().getUsername() == review.author.username}"
+                 th:text="수정"></a>
+              <a href="javascript:void(0);" th:data-uri="@{|/review/delete/${review.id}|}"
+                 class="btn-delete delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
+                 th:if="${review.author != null and #authentication.getPrincipal().getUsername() == review.author.username}"
+                 th:text="삭제"></a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="SD-bodyTextBox">
+        <p th:text="${review.content}"></p>
+      </div>
+
+
+      <div class="SD-commentTitle"><h5 class="card-title">댓글 목록</h5>
+        <small th:text="|${#lists.size(review.answerList)}개의 답변이 있습니다.|"></small>
+      </div>
+      <div class="SD-commentBody">
+        <ul>
+          <li th:each="answer : ${review.answerList}">
+            <a th:id="|answer_${answer.id}|"></a>
+            <!-- 댓글 1 -->
+            <div class="mb-3">
+              <div class="d-flex justify-content-between">
+                <div class="SD-commentTextBox">
+                  <strong th:if="${answer.author != null}" th:text="${answer.author.nickname}">></strong>
+                  <p th:text="${answer.content}"></p>
+                  <small class="text-muted" th:text="${#temporals.format(answer.createDate, 'yyyy.MM.dd HH:mm')}"></small>
+                </div>
+                <!-- 댓글 아이콘 -->
+                <div class="SD-commentButtonBox">
+                  <a th:href="@{|/answer/modify/${answer.id}|}" class="btn_delete"
+                     sec:authorize="isAuthenticated()"
+                     th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
+                     ><img alt="svg" th:src="@{/img/svg/ic_baseline-create.svg}"></a>
+                  <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"
+                     class="btn_delete delete" sec:authorize="isAuthenticated()"
+                     th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
+                     ><img alt="svg" th:src="@{/img/svg/material-symbols_delete.svg}"></a>
+                  <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"
+                     class="btn_delete" sec:authorize="isAuthenticated()"
+                     th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
+                  ><img alt="svg" th:src="@{/img/svg/tabler_flag-filled.svg}"></a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <h5 class="card-title">댓글 작성</h5>
+      <form class="SD-form" method="post" th:action="@{|/answer/create/${review.id != null ? review.id : 0}|}" th:object="${answerForm}">
+      <div th:replace="~{components/form_errors :: formErrorsFragment}"></div>
+                <div class="mb-3">
+                  <textarea sec:authorize="isAnonymous()" disabled th:field="*{content}" class="form-control" rows="10"></textarea>
+                  <textarea sec:authorize="isAuthenticated()" th:field="*{content}" class="form-control" rows="10"></textarea>
+                </div>
+        <input class="btn btn-primary" type="submit" value="댓글등록">
+      </form>
+
+
+      <div class="d-flex justify-content-between mt-4">
+        <a class="btn btn-outline-secondary" href="#">이전 게시물</a>
+        <a class="btn btn-outline-primary" th:href="@{/review/sub}">목록</a>
+        <a class="btn btn-outline-secondary" href="#">다음 게시물</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+</html>
+
+<script layout:fragment="script" type='text/javascript'>
+  const delete_elements = document.getElementsByClassName("delete");
+  Array.from(delete_elements).forEach(function(element) {
+      element.addEventListener('click', function() {
+          if(confirm("정말로 삭제하시겠습니까?")) {
+              location.href = this.dataset.uri;
+          };
+      });
+  });
+
+  const recommend_elements = document.getElementsByClassName("recommend");
+Array.from(recommend_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 추천하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+</script>

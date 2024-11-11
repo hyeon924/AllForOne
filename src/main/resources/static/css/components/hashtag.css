@@ -1,0 +1,14 @@
+.hashtagItem {
+  width: 110px;
+  height: 32px;
+  border-radius: 25px;
+  background-color: #3C92DC;
+  text-align: center;
+}
+
+.hashtagItem>span {
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 32px;
+}

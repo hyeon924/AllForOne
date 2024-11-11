@@ -1,0 +1,150 @@
+.banner {
+    width: 100%;
+    height: 500px;
+    background-image: url(../../img/png/bg-sub-frame01.png);
+}
+
+.search-form{
+    margin : 10px;
+}
+
+.input-group{
+    width: 1110px;
+    height: auto;
+    margin: 0 auto;
+}
+.sub-contentArea {
+    width: 100%;
+    height: auto;
+    min-height: 1000px;
+    background-image: url(../../img/png/bg-item01.png);
+}
+
+.subArea {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.tabBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.subArea .nav-link {
+    border: 1px solid #ddd !important;
+    border-radius: 0px !important;
+    border-right: none !important;
+}
+.subArea .nav-item:last-child .nav-link {
+    border-right: 1px solid #ddd !important;
+}
+
+.tab-pane > .sub-tab_contentBox {
+    width: 100%;
+    height: auto;
+    padding: 24px 0px;
+}
+
+.sub-contentList_itemBox {
+    width: 100%;
+    height: 260px;
+    border: 1px solid #606060;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    margin-bottom: 24px;
+}
+.sub-contentList_itemBox:last-child {
+    margin-bottom: 0px;
+}
+
+.sub-contentList_itemBox:hover {
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.sub-contentList_itemBox>img,
+.sub-contentList_itemBox>div {
+    height: 100%;
+}
+
+.sub-contentList_textBox {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    padding: 0px 12px;
+}
+.sub-contentList_textBox>img {
+    width: 50px;
+}
+
+.sub-contentList_text {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 12px;
+}
+
+.sub-TitleText{
+    font-size:2rem;
+}
+
+.sub-contentText {
+    height: 100px; /* 고정 높이 설정 */
+    overflow: hidden; /* 넘치는 내용 숨기기 */
+    text-overflow: ellipsis; /* 넘치는 내용에 ... 표시하기 */
+    display: -webkit-box; /* Flexbox 사용 */
+    font-size:24px;
+    -webkit-line-clamp: 2; /* 최대 줄 수 설정 (예: 2줄) */
+    -webkit-box-orient: vertical; /* 세로 방향 정렬 설정 */
+    white-space: normal; /* 일반 줄바꿈 */
+}
+
+.sub-content_hashtagBox {
+    width: 100%;
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    justify-self: center;
+}
+
+.hashtagItem {
+    width: 120px;
+    height: 32px;
+    border-radius: 25px;
+    background-color: #3C92DC;
+    text-align: center;
+}
+
+.hashtagItem>span {
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 32px;
+}
+
+.sub-createBTN {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-top: 12px;
+}
+
+
+.sub-bodyContent {
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sub-contentListItem {
+    display:flex;
+    justify-content:space-between;
+}

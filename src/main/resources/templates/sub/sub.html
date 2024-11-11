@@ -1,0 +1,302 @@
+<html layout:decorate="~{layout/layout}">
+<head>
+  <link rel="stylesheet" th:href="@{/css/pages/sub.css}">
+</head>
+<div layout:fragment="content">
+
+  <!-- 경로 -->
+  <div class="navArea">
+    <a th:href="@{/}">Home</a>
+    <span>|</span>
+    <a th:href="@{/review/sub}" >Content</a>
+    <span>|</span>
+    <span>DRAMA</span>
+  </div>
+
+
+  <!-- 타이틀 이미지 -->
+  <section class="container-fluid text-center banner"></section>
+
+
+  <form th:action="@{/review/sub/search}" method="get" class="search-form">
+    <input type="hidden" name="subCategory" id="subCategoryInput" value="all">
+
+    <div class="input-group">
+      <!-- 드롭다운 메뉴 -->
+      <div class="input-group-prepend">
+        <select name="filter" class="form-control" id="filterSelect">
+          <option value="all">전체</option>
+          <option value="tag">태그</option>
+          <option value="title">제목</option>
+          <!--          <option value="author">작성자</option>-->
+        </select>
+      </div>
+      <!-- 검색어 입력 -->
+      <input type="text" name="query" class="form-control" placeholder="Search in site">
+      <!-- 검색 버튼 -->
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="submit" th:text="검색">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+  <!-- 주요 내용 -->
+  <div class="sub-contentArea">
+    <section class="subArea">
+      <!-- 탭 목록 -->
+      <div class="tabBox">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="all-tab" onclick="showTabContent('all')" type="button" style="color: black !important; font-size: 12px;">All</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link " id="romance-tab" onclick="showTabContent('romance')" type="button" style="color: black !important; font-size: 12px;">Romance</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="action-tab" onclick="showTabContent('action')" type="button" style="color: black !important; font-size: 12px;">Action</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="sf-tab" onclick="showTabContent('sf')" type="button" style="color: black !important; font-size: 12px;">SF</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="horror-tab" onclick="showTabContent('horror')" type="button" style="color: black !important; font-size: 12px;">Horror</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="comedy-tab" onclick="showTabContent('comedy')" type="button" style="color: black !important; font-size: 12px;">Comedy</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="others-tab" onclick="showTabContent('others')" type="button" style="color: black !important; font-size: 12px;">Others</button>
+          </li>
+        </ul>
+
+        <p>전체 <strong>251</strong>(1/210)</p>
+
+      </div>
+      <div class="container mt-5 sub-bodyContent">
+        <!-- 탭 내용 -->
+        <div class="tab-content" id="myTabContent">
+
+          <div id="all-content" class="sub-tab_contentBox">
+            <!-- 전체 탭 내용 -->
+            <div class="sub-contentList_itemBox" th:each="review : ${reviews}" th:data-id="${review.id}" th:data-subcategory="${review.category.subCategory}" style="cursor: pointer;">
+              <img th:src="@{/img/png/ex-img.png}" alt="img" data-id="${review.id}">
+              <div class="sub-contentList_textBox" data-id="${review.id}">
+                <img th:src="@{/img/svg/token-branded_lovely.svg}" alt="svg" data-id="${review.id}">
+                <div class="sub-contentList_text" data-id="${review.id}">
+                  <div class="sub-contentListItem" data-id="${review.id}">
+                    <div class="sub-nameAnswer">
+                      <p th:if="${review.author != null}" th:text="${review.author.nickname}"></p>
+                      <span class="text-danger small ms-2"
+                            th:if="${#lists.size(review.answerList) > 0}"
+                            th:text="${#lists.size(review.answerList)}">
+                    </span>
+
+                    </div>
+                    <span th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd HH:mm')}"></span>
+                  </div>
+                  <p th:text="${review.title}" data-id="${review.id}" class="sub-TitleText">Title</p>
+                  <p class="sub-contentText" th:text="${review.contentStory}" data-id="${review.id}"></p>
+                  <div class="sub-content_hashtagBox" data-id="${review.id}">
+                    <div class="sub-content_hashtagBox">
+                      <div class="hashtagItem"><span>#hashtag</span></div>
+                      <div class="hashtagItem"><span>#hashtag</span></div>
+                      <div class="hashtagItem"><span>#hashtag</span></div>
+                      <div class="hashtagItem"><span>#hashtag</span></div>
+                      <div class="hashtagItem"><span>#hashtag</span></div>
+                      <div class="hashtagItem"><span>#hashtag</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <!-- 각 탭 내용에 대한 ID 추가 -->
+          <div id="romance-content" class="sub-tab_contentBox" style="display: none;">
+          </div>
+          <div id="search-content" class="sub-tab_contentBox" style="display: none;">
+            <div th:each="review : ${paging.content}">
+              <!-- 검색 결과를 표시하는 템플릿 코드 추가 -->
+              <div th:data-id="${review.id}" style="cursor: pointer;">
+                <p th:text="${review.title}"></p>
+                <p th:text="${review.contentStory}"></p>
+              </div>
+            </div>
+          </div>
+          <div id="action-content" class="sub-tab_contentBox" style="display: none;">
+            <!-- 액션 탭 내용 -->
+          </div>
+          <div id="sf-content" class="sub-tab_contentBox" style="display: none;">
+            <!-- SF 탭 내용 -->
+          </div>
+          <div id="horror-content" class="sub-tab_contentBox" style="display: none;">
+            <!-- Horror 탭 내용 -->
+          </div>
+          <div id="comedy-content" class="sub-tab_contentBox" style="display: none;">
+            <!-- Comedy 탭 내용 -->
+          </div>
+          <div id="others-content" class="sub-tab_contentBox" style="display: none;">
+            <!-- 기타 탭 내용 -->
+          </div>
+        </div>
+
+        <div class="sub-createBTN">
+          <a class="a-btn btn btn-primary " th:href="@{/review/create}">글 등록</a>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <div th:if="${!paging.isEmpty()}">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+        <a class="page-link"
+           th:href="@{|?page=${paging.number-1}|}">
+          <span>이전</span>
+        </a>
+      </li>
+      <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+          th:if="${page >= paging.number-2 and page <= paging.number+2}"
+          th:classappend="${page == paging.number} ? 'active'"
+          class="page-item">
+        <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+      </li>
+      <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+        <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+          <span>다음</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+</html>
+<script>
+  function showTabContent(subCategory) {
+      console.log('showTabContent 함수 호출됨, 선택한 카테고리:', subCategory);
+
+      // 모든 탭 콘텐츠를 숨김
+      document.querySelectorAll('.sub-tab_contentBox').forEach(function(contentBox) {
+          contentBox.style.display = 'none';
+      });
+
+      if (subCategory === 'search') {
+          // 검색 결과 탭 활성화
+          var searchContentBox = document.getElementById('search-content');
+          if (searchContentBox) {
+              searchContentBox.style.display = 'flex';
+              console.log('검색 결과 탭 활성화');
+          } else {
+              console.error("검색 결과 콘텐츠 박스를 찾을 수 없습니다: search-content");
+          }
+      } else {
+          // 일반 탭 로직
+          var allContentBox = document.getElementById('all-content');
+          if (allContentBox) {
+              allContentBox.style.display = 'block';
+          } else {
+              console.error("전체 콘텐츠 박스를 찾을 수 없습니다: all-content");
+          }
+
+          // 리뷰 아이템 필터링
+          document.querySelectorAll('.sub-contentList_itemBox').forEach(function(item) {
+              if (item.getAttribute('data-subcategory') === subCategory || subCategory === 'all') {
+                  item.style.display = 'flex';
+                  console.log('매칭 성공: ', item);
+              } else {
+                  item.style.display = 'none';
+                  console.log('매칭 실패: ', item);
+              }
+          });
+      }
+
+      // 모든 탭의 'active' 클래스 제거
+      document.querySelectorAll('.nav-link').forEach(function(tab) {
+          tab.classList.remove('active');
+      });
+
+      // 현재 클릭된 탭에 'active' 클래스 추가
+      var selectedTab = document.getElementById(subCategory + '-tab');
+      if (selectedTab) {
+          selectedTab.classList.add('active');
+          console.log('선택된 탭에 active 클래스 추가:', selectedTab);
+      } else if (subCategory === 'search') {
+          // 검색일 경우 별도 처리
+          console.log('검색 결과에 대해 활성화되는 탭이 없습니다.');
+      } else {
+          console.error("탭을 찾을 수 없습니다: " + subCategory + '-tab');
+      }
+
+      // 서브카테고리 값을 hidden input에 설정
+      document.getElementById('subCategoryInput').value = subCategory;
+  }
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // 각 탭 클릭 시 subCategoryInput 값을 업데이트
+      document.querySelectorAll('.nav-link').forEach(function(tab) {
+          tab.addEventListener('click', function() {
+              const subCategory = tab.getAttribute('id').replace('-tab', '');
+              document.getElementById('subCategoryInput').value = subCategory;
+
+              // 탭에 맞는 컨텐츠를 보여줍니다.
+              showTabContent(subCategory);
+          });
+      });
+
+      // 첫 페이지 로드 시 "전체" 탭 클릭 시뮬레이션
+      showTabContent('all');
+
+      // 각 리뷰 아이템에 대한 클릭 이벤트 추가
+      document.querySelectorAll('.sub-contentList_itemBox').forEach(function(item) {
+          item.addEventListener('click', function() {
+              const reviewId = item.getAttribute('data-id');
+              if (reviewId) {
+                  window.location.href = `/review/detail/${reviewId}`;
+              } else {
+                  console.error("리뷰 ID를 찾을 수 없습니다.");
+              }
+          });
+      });
+
+
+    // 검색 후 전체 탭 활성화
+    const filterElement = document.querySelector('select[name="filter"]');
+    if (filterElement) {
+        const filter = filterElement.value;
+
+        if (filter) {
+            document.querySelectorAll('.nav-link').forEach(function(tab) {
+                tab.classList.remove('active');
+            });
+            const allTab = document.getElementById('all-tab');
+            if (allTab) {
+                allTab.classList.add('active');
+            }
+        }
+    }
+});
+
+
+
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.sub-contentList_itemBox').forEach(function(item) {
+      item.addEventListener('click', function() {
+        const reviewId = item.getAttribute('data-id');
+        if (reviewId) {
+          window.location.href = `/review/detail/${reviewId}`;
+        } else {
+          console.error("리뷰 ID를 찾을 수 없습니다.");
+        }
+      });
+    });
+  });
+
+</script>

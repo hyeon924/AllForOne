@@ -1,0 +1,173 @@
+<html layout:decorate="~{layout/layout}" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <link rel="stylesheet" th:href="@{/css/pages/notice.css}">
+</head>
+<div layout:fragment="content">
+  <!-- 경로 -->
+  <div class="navArea">
+    <a href="/">Home</a>
+    <span>|</span>
+    <a th:href="notice">Notices</a>
+    <span>|</span>
+    <span id="nav-tabTitle" th:text="${currentBoardType}">Notice</span>
+  </div>
+
+  <!-- 주요 내용 -->
+  <div class="N-contentArea">
+    <div class="container mt-5">
+      <div class="N-titleBox">
+        <h3 id="tabTitle" th:text="${currentBoardType}">Notice</h3>
+
+        <!-- 탭 메뉴 -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button"
+                    role="tab" aria-controls="tab1" aria-selected="${currentBoardType == 'Notice'}" onclick="navigateToBoardType('Notice')">Notice</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button" role="tab"
+                    aria-controls="tab2" aria-selected="${currentBoardType == 'FAQ'}" onclick="navigateToBoardType('FAQ')">FAQ</button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="N-searchBox">
+        <p>전체 <strong>251</strong>(1/210)</p>
+        <form class="d-flex" role="search" action="/notice/search" method="get">
+          <select id="searchType" name="searchType" class="form-select me-2" aria-label="검색 타입 선택">
+            <option value="all">전체</option>
+            <option value="title">제목</option>
+            <option value="content">내용</option>
+          </select>
+          <input id="searchInput" name="searchTerm" class="form-control me-2" type="search" placeholder="검색어 입력" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">
+            <img src="/img/svg/ic_round-search.svg" alt="icon">
+
+          </button>
+        </form>
+      </div>
+
+      <!-- 탭 콘텐츠 -->
+      <div class="tab-content" id="myTabContent" style="border-top: 3px solid #3C92DC !important;">
+        <!-- Tab 1 콘텐츠 -->
+        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+          <table class="table table-bordered">
+            <tbody>
+            <tr class="clickable-row" th:data-href="@{|/notice/detail/${notice.id}|}" th:each="notice:${notices}">
+              <td th:text="${notice.id}"></td>
+              <td>
+                <a th:text="${notice.title}"></a>
+                <br>
+                <small class="text-muted" th:text="${#temporals.format(notice.createDate, 'yyyy.MM.dd')}+'| 관리자'"></small>
+              </td>
+              <td>
+                <i class="bi bi-eye" th:text="${notice.views}"></i>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div class="sub-createBTN">
+            <a sec:authorize="isAuthenticated()"
+               th:if="${#authentication.isAuthenticated()}"
+               class="a-btn btn btn-primary" th:href="@{/notice/create}" th:text="'공지사항 등록'"></a>
+          </div>
+        </div>
+
+        <!-- Tab 2 콘텐츠 -->
+        <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+          <table class="table table-bordered">
+            <tbody>
+            <tr class="clickable-row" th:data-href="@{|/notice/detail/${faq.id}|}" th:each="faq:${faqs}">
+              <td style="width: 60px;"></td>
+              <td>
+                <a th:text="${faq.title}"></a>
+                <br>
+                <small class="text-muted" th:text="${#temporals.format(faq.createDate, 'yyyy.MM.dd')}+'| 관리자'"></small>
+              </td>
+              <td>
+                <i class="bi bi-eye" th:text="${faq.views}"></i>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:if="${!paging.isEmpty()}">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+        <a class="page-link" th:href="@{|?page=${paging.number-1}|}">
+          <span>이전</span>
+        </a>
+      </li>
+      <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+          th:if="${page >= paging.number-2 and page <= paging.number+2}"
+          th:classappend="${page == paging.number} ? 'active'"
+          class="page-item">
+        <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+      </li>
+      <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+        <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+          <span>다음</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+</html>
+
+<script>
+  function searchNotices(event) {
+      event.preventDefault(); // 기본 폼 제출 방지
+      const searchTerm = document.getElementById('searchInput').value;
+      const searchType = document.getElementById('searchType').value; // 검색 타입 가져오기
+      const currentUrl = new URL(window.location.href);
+      currentUrl.searchParams.set('searchTerm', searchTerm); // 검색어를 쿼리 파라미터로 설정
+      currentUrl.searchParams.set('searchType', searchType); // 선택된 검색 타입 추가
+      window.location.href = currentUrl.toString(); // URL 변경 및 페이지 새로고침
+  }
+</script>
+
+<script>
+  // 테이블의 각 행을 클릭하면 해당 페이지로 이동하는 기능 추가
+  document.querySelectorAll('.clickable-row').forEach(function(row) {
+      row.addEventListener('click', function() {
+          window.location.href = row.dataset.href;
+      });
+  });
+</script>
+
+<script>
+  function navigateToBoardType(boardType) {
+      // 현재 페이지의 URL을 가져옵니다.
+      const currentUrl = new URL(window.location.href);
+      // boardType 쿼리 파라미터를 업데이트합니다.
+      currentUrl.searchParams.set('boardType', boardType);
+      // URL을 변경하면서 페이지를 새로고침합니다.
+      window.location.href = currentUrl.toString();
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const boardType = urlParams.get('boardType') || 'Notice'; // 기본값 'Notice'
+
+      // 탭 상태 초기화
+      const noticeTab = document.getElementById('tab1-tab');
+      const faqTab = document.getElementById('tab2-tab');
+
+      if (boardType === 'FAQ') {
+          noticeTab.classList.remove('active');
+          faqTab.classList.add('active');
+          document.getElementById('tab1').classList.remove('show', 'active');
+          document.getElementById('tab2').classList.add('show', 'active');
+      } else {
+          noticeTab.classList.add('active');
+          faqTab.classList.remove('active');
+          document.getElementById('tab1').classList.add('show', 'active');
+          document.getElementById('tab2').classList.remove('show', 'active');
+      }
+  });
+</script>

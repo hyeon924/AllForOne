@@ -1,0 +1,12 @@
+.a-btn {
+    display: flex;
+     justify-self: center;
+     justify-content: center;
+     align-items: center;
+     text-align: center;
+     margin: 0  !important;
+     margin-left : 12px !important;
+}
+.a-btn:nth-child(1) {
+margin-left: 0px !important;
+}

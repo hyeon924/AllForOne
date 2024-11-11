@@ -1,0 +1,15 @@
+.star-rating {
+    font-size: 2.5rem;
+    color: #ffc107; /* 별점 색상 (노란색) */
+    margin-right: 24px;
+}
+
+.SD-starBox > span > strong {
+  font-size: 1.5rem;
+}
+
+
+.star-rating i:hover,
+.star-rating i.active {
+    color: #ffc107;
+}

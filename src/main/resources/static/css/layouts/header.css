@@ -1,0 +1,182 @@
+
+@import url('https://fonts.googleapis.com/css?family=Catamaran:900');
+
+/* 헤더 영역 */
+header {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  z-index: 999;
+}
+
+header > nav {
+  width: 100%;
+  height: 100%;
+  padding: 0px 24px !important;
+}
+
+.container-fluid {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.collapse {
+  justify-content: end;
+  height: 100%;
+}
+
+.navbar-nav {
+  border: 1px solid rgb(255, 255, 255);
+  height: 100%;
+}
+
+.nav-item ,
+.nav-item-login {
+  align-self: center;
+  height: 100%;
+}
+
+.nav-item>a {
+  display: inline-block;
+  width: auto;
+  height: 100%;
+  text-align: center;
+  line-height: 75px; /* 텍스트 수직정렬 */
+  padding: 0;
+  margin-right: 12px;
+}
+
+.dropdown-menu {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  height: 150px;
+  border: none;
+  border-bottom: 1px solid #D9D9D9;
+  border-radius: 0;
+  z-index: 99; /* 컨텐츠 순위 맨 위로 설정 */
+  position: relative;
+  top: 70px;
+}
+
+.dropdown-menu-last {
+  width: 100%;
+}
+
+.dropdown-item {
+  text-align: center; /* 텍스트 가운데 정렬 */
+	font-family: 'Catamaran', sans-serif !important;
+}
+
+.navbar-nav .dropdown-menu {
+  transform: translateY(-5px); /* 초기 위치 설정 */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* 서브 메뉴 애니메이션 */
+}
+
+.navbar-nav:hover .dropdown-menu {
+  display: block;
+  opacity: 1; 
+  transform: translateY(0); /* 원래 위치로 이동 */
+  animation: drop 0.3s ease forwards; /* 폭포처럼 떨어지는 애니메이션 적용 */
+
+}
+
+dropdown-item:active {
+    color: #16181b !important;
+    text-decoration: none;
+    background-color: #fff !important;
+}
+.dropdown-item:focus, .dropdown-item:hover {
+    color: #16181b !important;
+    text-decoration: none;
+    background-color: #fff !important;
+}
+
+/* 애니메이션 정의 */
+@keyframes drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px); /* 서브 메뉴 초기 위치 */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* 서브 메뉴 최종 위치 */
+  }
+}
+
+/* 서브 메뉴 항목 스타일 */
+.dropdown-menu li {
+  opacity: 1; 
+  transform: translateY(0); /* 원래 위치로 이동 */
+}
+
+.navbar-brand {
+    width: 48px;
+    height 32px;
+	font-family: 'Catamaran', sans-serif !important;
+  color: #172A5C;
+}
+.navbar-brand > img {
+    width: 32px;
+}
+
+a {
+	text-decoration:none;
+}
+
+nav {
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform:translate(-50%, -50%);
+}
+nav ul li {
+	margin:10px 0;
+	position:relative;
+}
+
+.nav-link {
+	font-size: 20px;
+	display:block;
+	text-align:center;
+	padding:5px 10px;
+	text-transform:uppercase;
+	position:relative;
+	color:transparent;
+	font-family: 'Catamaran', sans-serif !important;
+	   color: transparent !important;
+}
+nav ul li a:before, nav ul li a:after {
+	content:attr(data-text);
+	color:#262626;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	padding:5px 0;
+	box-sizing:border-box;
+	transition:0.5s;
+}
+
+nav ul li a:before {
+	-webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+	clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+}
+nav ul li a:after {
+	-webkit-clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0% 100%);
+	clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0% 100%);
+}
+nav ul li a:hover:before {
+	color:#f00;
+	transform:translate(10px, -2px);
+}
+nav ul li a:hover:after {
+	color:#f00;
+	transform:translate(-10px, 2px);
+}
+.tab-text {
+    color: #000 !important; /* 기본 텍스트 색상 */
+}

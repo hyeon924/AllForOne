@@ -1,0 +1,162 @@
+<html layout:decorate="~{layout/layout}">
+<head>
+  <link rel="stylesheet" th:href="@{/css/pages/create.css}">
+</head>
+<div layout:fragment="content">
+
+  <!-- 경로 -->
+  <div class="navArea">
+    <a th:href="@{/}">Home</a>
+    <span>|</span>
+    <a th:href="@{/review/sub}" >Content</a>
+    <span>|</span>
+    <span>DRAMA</span>
+  </div>
+
+  <!-- 주요 내용 -->
+  <div class="C-contentArea">
+    <form enctype="multipart/form-data" method="post"  th:object="${reviewForm}">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+      <div class="C-contentBox">
+        <img alt="img" th:src="@{/img/png/create-title.png}">
+
+        <div class="C-inputBox">
+          <div class="C-dataBox">
+            <div class="C-dataItem C-dataItemGroup">
+
+
+
+              <div class="C-dataItem_type">
+                <p>Category</p>
+                <div class="mb-3">
+                  <select class="form-select" th:field="*{subCategory}"  required>
+                    <option value="" selected disabled>Choose</option>
+                    <option value="romance">로맨스</option>
+                    <option value="action">액션</option>
+                    <option value="sf">SF</option>
+                    <option value="horror">호러</option>
+                    <option value="comedy">코미디</option>
+                    <option value="other">기타</option>
+                  </select>
+                </div>
+                <small>장르를 선택해주세요.</small>
+              </div>
+
+
+
+
+              <div class="C-dataItem_image">
+                <div class="mb-3">
+                  <label class="form-label" for="imageUpload">이미지 업로드</label>
+                  <input accept="image/*" class="form-control" id="imageUpload" name="image" type="file">
+                  <div class="form-text"><small>JPG, PNG 파일만 업로드 가능합니다.</small></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="C-dataItem">
+              <div class="mb-3">
+                <select class="form-select" id="category" name="category" required>
+                  <option value="" selected disabled>Choose</option>
+                  <option value="drama">드라마</option>
+                  <option value="movie">영화</option>
+                  <option value="novel">소설</option>
+                  <option value="clothes">의류</option>
+                  <option value="electronics">가전제품</option>
+                  <option value="restaurant">맛집</option>
+                  <option value="plays">놀거리</option>
+                </select>
+              </div>
+              <small>장르를 선택해주세요.</small>
+            </div>
+
+            <div class="C-dataItem">
+              <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" id="title" name="title" placeholder="제목을 입력해주세요." required type="text" th:field="*{title}">
+              </div>
+            </div>
+
+            <div class="C-dataItem">
+              <div class="mb-3">
+                <label class="form-label" for="contentStory">Content Story</label>
+                <input class="form-control" id="contentStory" name="contentStory" placeholder="줄거리를 입력해주세요." required type="text"  th:field="*{contentStory}">
+              </div>
+            </div>
+
+            <div class="C-dataItem">
+              <div class="mb-3">
+                <label class="form-label" for="hashtag">Hashtag</label>
+                <input class="form-control" id="hashtag" name="hashtag" placeholder="Hashtag" type="text">
+              </div>
+            </div>
+
+            <div class="C-dataItem container mt-5">
+              <div class="d-flex align-items-center C-starBox">
+                <!-- 별점 영역 -->
+                <div class="star-rating me-3">
+                  <i class="bi bi-star" data-value="1"></i>
+                  <i class="bi bi-star" data-value="2"></i>
+                  <i class="bi bi-star" data-value="3"></i>
+                  <i class="bi bi-star" data-value="4"></i>
+                  <i class="bi bi-star" data-value="5"></i>
+                </div>
+                <!-- 숫자 표시 -->
+                <span><strong id="ratingValue">0</strong> / 5</span>
+                <input id="rating" name="rating" type="hidden" value="0"> <!-- 별점을 hidden input으로 추가 -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="C-bodyTextBox">
+          <button>
+            <img alt="icon" th:src="@{/img/svg/mdi_camera-outline.svg}"></button>
+          <textarea id="content" name="content" required  th:field="*{content}"></textarea>
+        </div>
+
+        <div class="C-textBoxButton">
+          <a class="a-btn btn btn-secondary">임시저장</a>
+          <input class="a-btn btn btn-primary" type="submit" value="등록"> <!-- 폼 제출을 위한 input으로 변경 -->
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+</html>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const stars = document.querySelectorAll('.star-rating i');
+      const ratingValue = document.getElementById('ratingValue');
+      const ratingInput = document.getElementById('rating'); // hidden input을 추가하여 별점을 저장
+
+      // 각 별에 대한 클릭 이벤트 처리
+      stars.forEach(star => {
+          star.addEventListener('click', function() {
+              const value = this.getAttribute('data-value'); // 클릭한 별의 값
+              updateRating(value);
+          });
+      });
+
+      // 별점과 숫자 업데이트 함수
+      function updateRating(value) {
+          // 숫자 업데이트
+          ratingValue.innerText = value;
+          ratingInput.value = value; // hidden input에 별점 저장
+
+          // 별점 업데이트
+          stars.forEach(star => {
+              star.classList.remove('bi-star-fill', 'active');
+              star.classList.add('bi-star'); // 모든 별을 빈 별로 설정
+              if (star.getAttribute('data-value') <= value) {
+                  star.classList.remove('bi-star');
+                  star.classList.add('bi-star-fill', 'active'); // 선택한 별 이하를 채워진 별로 설정
+              }
+          });
+      }
+  });
+</script>

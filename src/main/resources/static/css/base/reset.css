@@ -1,0 +1,67 @@
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+:root {
+    cursor: default;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+body > div {
+    height: 100%;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+button {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+	transition: 0.3s;
+}
+
+a {
+    text-decoration: none;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    margin-block-start: unset;
+    margin-block-end: unset;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+ol, ul {
+    list-style: none;
+    padding-left: unset;
+    padding-inline-start: unset;
+    margin-block-start: unset;
+    margin-block-end: unset;
+}
+
+input {
+    outline: none;
+    background: none;
+    border: none;
+}

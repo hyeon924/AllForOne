@@ -1,0 +1,28 @@
+/* 색상 변수 정의 */
+:root {
+    --primary-color: #007bff; /* 기본 색상 */
+    --secondary-color: #6c757d; /* 보조 색상 */
+    --success-color: #28a745; /* 성공 색상 */
+    --danger-color: #dc3545; /* 위험 색상 */
+    --warning-color: #ffc107; /* 경고 색상 */
+    --info-color: #17a2b8; /* 정보 색상 */
+    --light-color: #f8f9fa; /* 연한 색상 */
+    --dark-color: #343a40; /* 어두운 색상 */
+}
+
+/* 색상 클래스를 통한 사용 예시 */
+.bg-primary {
+    background-color: var(--primary-color);
+}
+
+.bg-secondary {
+    background-color: var(--secondary-color);
+}
+
+.text-success {
+    color: var(--success-color);
+}
+
+.text-danger {
+    color: var(--danger-color);
+}
