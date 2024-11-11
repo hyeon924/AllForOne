@@ -69,5 +69,24 @@
 
 <br>
 
-## 8. 프로젝트 후기
+## 8. 서비스 화면
+#### - 로그인
+![image](https://github.com/user-attachments/assets/51025084-61c2-41fb-8106-d25fd8cb4138)
+
+#### - 회원가입
+![image](https://github.com/user-attachments/assets/be7a4675-65a1-481d-8cd1-050cc1b961d0)
+
+#### - 메인
+![image](https://github.com/user-attachments/assets/509d379c-4502-4054-824a-1fc897f58654)
+
+#### - 리뷰
+![image](https://github.com/user-attachments/assets/b0589fbc-dd03-48a7-aadc-83a017aae047)
+
+#### - 리뷰상세
+![image](https://github.com/user-attachments/assets/68fde3b3-c9ac-439c-ba65-3e1df3b5f67d)
+
+#### - 공지사항
+![image](https://github.com/user-attachments/assets/1a8b7cad-0136-40dd-8630-1ac0599db8d8)
+
+## 9. 프로젝트 후기
 - 처음 진행하는 팀 프로젝트에서 큰 문제 없이 진행할 수 있었음에 감사합니다. 지금까지 Git은 혼자서만 관리해 본 경험으로 팀원들과 관리를 어떻게 해야 할지에 대한 막연함이 컸지만, 팀원들의 도움으로 무리 없이 진행할 수 있었습니다. 기능별로 브랜치를 생성하여 완료될 때마다 팀원들과 코드 확인을 하고, 충돌이 일어나는 경우가 적어서 다행이었고 값진 경험이었습니다. 그리고 이번 프로젝트에서 처음 부트스트랩을 사용해 봤는데, 각자의 장단점을 뚜렷하게 경험할 수 있었습니다. 개발이 빠르게 진행되는 장점은 너무 좋았지만, 세부적인 디자인 컨트롤이 약간 어려워 디자인의 컨셉이 뚜렷하다면 CSS를 직접 작성하는 것이 좋겠다는 생각을 했습니다. 그 이외에도 느낀 점들이 많고, 더 고쳐 나가고 싶은 부분도 있습니다. 다음 프로젝트 때는 이번 경험을 바탕으로 더욱더 좋은 서비스를 만들고자 합니다.
