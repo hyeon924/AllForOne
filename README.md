@@ -77,7 +77,7 @@
 ![image](https://github.com/user-attachments/assets/be7a4675-65a1-481d-8cd1-050cc1b961d0)
 
 #### - 메인
-![image](https://github.com/user-attachments/assets/509d379c-4502-4054-824a-1fc897f58654)
+![image](https://github.com/user-attachments/assets/08a83aab-f9fb-4f88-9163-b78d53db4df8)
 
 #### - 리뷰
 ![image](https://github.com/user-attachments/assets/b0589fbc-dd03-48a7-aadc-83a017aae047)
